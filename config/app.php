@@ -177,6 +177,7 @@ return [
 
         //Our package
         Mews\Captcha\CaptchaServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

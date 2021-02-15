@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'admin-manage'], function (){
-    Route::get('login', [\App\Http\Controllers\AdminAuthController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('login', 'AdminAuthController@login')->name('admin.login.submit');
-    Route::get('logout', 'AdminAuthController@logout')->name('admin.logout');
+    Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+    Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+    Route::namespace('Admin')->middleware('admin')->group(function () {
+        Route::get('dashboard', function (){
+            dd('وارد می‌شود');
+        })->name('admin.dashboard');
+    });
+});
+
+Auth::routes();
+
+Route::get('home', function () {
+   dd('کاربر ساخته شد.');
 });

@@ -50,7 +50,7 @@
         <!-- Username -->
             <div class="input-field">
                 <i class="fa fa-user prefix"></i>
-                <input id="username-input" name="username" type="text" class="validate" required>
+                <input id="username-input" name="username" type="text" class="validate" required value="{{ old('username') }}">
                 <label for="username-input">Username</label>
             </div>
             <!-- /Username -->
