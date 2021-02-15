@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'admin-manage'], function (){
+    Route::get('login', [\App\Http\Controllers\AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('login', 'AdminAuthController@login')->name('admin.login.submit');
+    Route::get('logout', 'AdminAuthController@logout')->name('admin.logout');
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
