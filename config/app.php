@@ -178,7 +178,7 @@ return [
         //Our package
         Mews\Captcha\CaptchaServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*

@@ -1,109 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>پنل مدیریت | صفحه ورود</title>
+    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="_nK">
-    <link rel="icon" href="{{url('panel/assets/_con/images/icon.png')}}">
 
-    <title>Con - Admin Dashboard with Material Design</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ url('panel/dist/css/adminlte.min.css') }}">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{ url('panel/plugins/iCheck/square/blue.css') }}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
-    <!-- FontAwesome -->
-    <link rel="stylesheet" type="text/css" href="{{url('font_awesome')}}" />
-
-    <!-- Material Design Icons -->
-    <link rel="stylesheet" type="text/css" href="{{url('panel/assets/material-design-icons/css/material-design-icons.min.css')}}" />
-
-    <link rel="stylesheet" type="text/css" href="{{url('panel/bower_components/ionicons/css/ionicons.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{url('panel/assets/_con/css/con-base.css')}}" />
-
-<!--[if lt IE 9]>
-    <script src="{{url('panel/bower_components/html5shiv/dist/html5shiv.min.js')}}"></script>
-    <![endif]-->
-
-
+    <!-- bootstrap rtl -->
+    <link rel="stylesheet" href="{{ url('panel/dist/css/bootstrap-rtl.min.css') }}">
+    <!-- template rtl version -->
+    <link rel="stylesheet" href="{{ url('panel/dist/css/custom-style.css') }}">
 </head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <a href="../../index2.html"><b>ورود به سایت</b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <p class="login-box-msg">فرم زیر را تکمیل کنید و ورود بزنید</p>
 
-<body>
+            <form action="{{ route('admin.login.submit') }}" method="POST">
+                @csrf
 
-<section id="sign-in">
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert">{{ $error }}</div>
+                    @endforeach
+                @endif
 
-    <canvas id="bubble-canvas"></canvas>
-    <form method="POST" action="{{route('admin.login.submit')}}">
-        @csrf
-        <div class="row links">
-            <div class="col s12 right-align">
-                <strong>Sign In</strong></div>
+                <div class="input-group mb-3">
+                    <input type="text" id="username-input" name="username" class="form-control" placeholder="ایمیل" required>
+                    <div class="input-group-append">
+                        <span class="fa fa-envelope input-group-text"></span>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" id="password-input" name="password" class="form-control" placeholder="رمز عبور" required>
+                    <div class="input-group-append">
+                        <span class="fa fa-lock input-group-text"></span>
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <img src="{{captcha_src('flat')}}" style="display: block;margin: 0 auto;">
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" id="captcha-input" name="captcha" class="form-control" placeholder="کپچا" required>
+                    <div class="input-group-append">
+                        <span class="fa fa-lock input-group-text"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                <input type="checkbox"> یاد آوری من
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">ورود</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            <div class="social-auth-links text-center mb-3">
+                <p>- OR -</p>
+                <a href="#" class="btn btn-block btn-primary">
+                    <i class="fa fa-facebook mr-2"></i> ورود با اکانت فیسوبک
+                </a>
+                <a href="#" class="btn btn-block btn-danger">
+                    <i class="fa fa-google-plus mr-2"></i> ورود با اکانت گوگل
+                </a>
+            </div>
+            <!-- /.social-auth-links -->
+
+            <p class="mb-1">
+                <a href="#">رمز عبورم را فراموش کرده ام.</a>
+            </p>
+            <p class="mb-0">
+                <a href="register.html" class="text-center">ثبت نام</a>
+            </p>
         </div>
+        <!-- /.login-card-body -->
+    </div>
+</div>
+<!-- /.login-box -->
 
-        <div class="card-panel clearfix">
-
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div class="alert">{{ $error }}</div>
-            @endforeach
-        @endif
-
-        <!-- Username -->
-            <div class="input-field">
-                <i class="fa fa-user prefix"></i>
-                <input id="username-input" name="username" type="text" class="validate" required value="{{ old('username') }}">
-                <label for="username-input">Username</label>
-            </div>
-            <!-- /Username -->
-
-            <!-- Password -->
-            <div class="input-field">
-                <i class="fa fa-unlock-alt prefix"></i>
-                <input id="password-input" name="password" type="password" class="validate" required>
-                <label for="password-input">Password</label>
-            </div>
-            <!-- /Password -->
-
-
-            <div class="input-field">
-                <img src="{{captcha_src('flat')}}" style="display: block;margin: 0 auto;">
-            </div>
-
-            <!-- Password -->
-            <div class="input-field">
-                <i class="fa fa-check-square-o prefix"></i>
-                <input id="captcha-input" name="captcha" type="text" class="validate" required>
-                <label for="captcha-input">Captcha</label>
-            </div>
-            <!-- /Password -->
-
-            <div class="switch">
-                <label>
-                    <input name="remember" type="checkbox" checked />
-                    <span class="lever"></span>
-                    Remember
-                </label>
-            </div>
-
-            <button class="waves-effect waves-light btn-large z-depth-0 z-depth-1-hover">Sign In</button>
-        </div>
-
-        <div class="links right-align">
-            <a href="#">Forgot Password?</a>
-        </div>
-
-    </form>
-    <!-- /Sign In Form -->
-
-</section>
-
-
-<script type="text/javascript" src="{{url('panel/bower_components/jquery/dist/jquery.min.js')}}"></script>
-<script type="text/javascript" src="{{url('panel/bower_components/jquery-requestAnimationFrame/dist/jquery.requestAnimationFrame.min.js')}}"></script>
-<script type="text/javascript" src="{{url('panel/bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.min.js')}}"></script>
-<script type="text/javascript" src="{{url('panel/bower_components/materialize/bin/materialize.js')}}"></script>
-<script type="text/javascript" src="{{url('panel/assets/_con/js/_con.js')}}"></script>
-
-
+<!-- jQuery -->
+<script src="{{ url('panel/plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ url('panel/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- iCheck -->
+<script src="{{ url('panel/plugins/iCheck/icheck.min.js') }}"></script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass   : 'iradio_square-blue',
+            increaseArea : '20%' // optional
+        })
+    })
+</script>
 </body>
-
 </html>

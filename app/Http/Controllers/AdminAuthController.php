@@ -9,11 +9,17 @@ class AdminAuthController extends Controller
 {
     public function showLoginForm(Request $request)
     {
+        if( \auth()->user()->isAdmin())
+            return redirect()->route('admin.dashboard');
+
         return view('admin.login');
     }
 
     public function login(Request $request)
     {
+        if( \auth()->user()->isAdmin())
+            return redirect()->route('admin.dashboard');
+
         $this->validate($request, [
             'username' => 'required|email',
             'password' => 'required|min:6',

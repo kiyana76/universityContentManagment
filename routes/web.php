@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AdminAuthController;
+use \App\Http\Controllers\Admin\{DashboardController, GlobalGroupController};
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +19,10 @@ Route::group(['prefix' => 'admin-manage'], function (){
     Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
     Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-    Route::namespace('Admin')->middleware('admin')->group(function () {
-        Route::get('dashboard', function (){
-            dd('وارد می‌شود');
-        })->name('admin.dashboard');
+
+    Route::middleware('admin')->group(function () {
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::resource('groups', GlobalGroupController::class);
     });
 });
 
