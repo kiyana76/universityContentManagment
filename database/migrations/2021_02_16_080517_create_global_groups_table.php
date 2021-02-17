@@ -16,6 +16,7 @@ class CreateGlobalGroupsTable extends Migration
         Schema::create('global_groups', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug');
             $table->enum('status', array('enable', 'disable'));
             $table->timestamps();
         });
