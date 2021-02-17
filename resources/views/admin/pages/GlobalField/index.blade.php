@@ -1,20 +1,20 @@
 @extends('admin.master')
-@section('header_title', 'مدیریت گروه های آموزشی')
+@section('header_title', 'مدیریت رشته های تحصیلی')
 @section('breadcrumb-items')
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">صفحه اصلی</a></li>
-    <li class="breadcrumb-item active">مدیریت گروه های آموزشی</li>
+    <li class="breadcrumb-item active">مدیریت رشته های تحصیلی</li>
 @endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-2 pb-2">
-                <a href="{{ route('groups.create') }}" class="btn btn-block btn-outline-success">ایجاد</a>
+                <a href="{{ route('fields.create') }}" class="btn btn-block btn-outline-success">ایجاد</a>
             </div>
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">گروه های آموزشی</h3>
+                        <h3 class="card-title">رشته های تحصیلی</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -37,7 +37,7 @@
                                 <th>عملیات</th>
                             </tr>
 
-                            @foreach($groups as $key => $item)
+                            @foreach($fields as $key => $item)
                                 <tr id="row-{{ $item->id }}">
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $item->full_name }}</td>
@@ -52,8 +52,8 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        <a href="{{ route('groups.edit', $item->id) }}" class="btn btn-default"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('groups.destroy', $item->id) }}" class="btn btn-default delete" data-id="{{ $item->id }}"><i class="fa fa-remove"></i></a>
+                                        <a href="{{ route('fields.edit', $item->id) }}" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('fields.destroy', $item->id) }}" class="btn btn-default delete" data-id="{{ $item->id }}"><i class="fa fa-remove"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

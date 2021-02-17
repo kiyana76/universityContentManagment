@@ -7,19 +7,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GlobalGroup extends Model
+class GlobalField extends Model
 {
     use HasFactory, Sluggable, HasJalaliCreatedAt;
 
-    protected $fillable = ['title', 'status'];
-
-    public function getFullNameAttribute() {
-        return 'گروه آموزشی ' . $this->title;
-    }
-
-    public function isEnable() {
-        return $this->status == 'enable';
-    }
+    protected $fillable = ['title', 'status', 'group_id'];
 
     public function sluggable(): array
     {
@@ -30,7 +22,15 @@ class GlobalGroup extends Model
         ];
     }
 
-    public function fields() {
-        return $this->hasMany(GlobalField::class);
+    public function isEnable() {
+        return $this->status == 'enable';
+    }
+
+    public function getFullNameAttribute() {
+        return 'رشته تحصیلی ' . $this->title;
+    }
+
+    public function group() {
+        return $this->belongsTo(GlobalGroup::class);
     }
 }

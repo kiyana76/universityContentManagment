@@ -16,6 +16,7 @@ class CreateGlobalFieldsTable extends Migration
         Schema::create('global_fields', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug');
             $table->enum('status', array('enable', 'disable'));
             $table->unsignedBigInteger('group_id');
             $table->foreign('group_id')->references('id')->on('global_groups')->onDelete('cascade');

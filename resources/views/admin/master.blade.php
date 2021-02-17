@@ -31,6 +31,10 @@
     <link rel="stylesheet" href="{{ url('panel/dist/css/bootstrap-rtl.min.css') }}">
     <!-- template rtl version -->
     <link rel="stylesheet" href="{{ url('panel/dist/css/custom-style.css') }}">
+    <!--SELECT2-->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    @stack('styles')
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -53,6 +57,12 @@
 
         <!-- Main content -->
         <section class="content">
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger">{{ $error }}</div>
+                @endforeach
+            @endif
+
             @if(session('alert-title'))
                 <div class="row">
                     <div class="col-md-12">
@@ -116,5 +126,9 @@
 <script src="{{ url('panel/dist/js/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url('panel/dist/js/demo.js') }}"></script>
+<!-- SELECT2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@stack('scripts')
+
 </body>
 </html>

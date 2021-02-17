@@ -43,12 +43,6 @@ class GlobalGroupController extends Controller
     }
 
 
-    public function show(GlobalGroup $group)
-    {
-        //
-    }
-
-
     public function edit(GlobalGroup $group)
     {
         return view('admin.pages.GlobalGroup.update', compact('group'));
