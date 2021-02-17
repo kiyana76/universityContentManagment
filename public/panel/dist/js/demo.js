@@ -220,4 +220,31 @@
 
   ConvertNumberToPersion()
 
+
+    $(".delete").click(function() {
+        if (!confirm("آیا از حذف این رکورد اطمینان دارید؟")) return false;
+        var row = "#row-" + $(this).attr("data-id");
+        $.ajax({
+            url: $(this).attr("href"),
+            type: "DELETE",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf_token"]').attr("content")
+            },
+            success: function(result) {
+                if (result.ok) {
+                    $(row).fadeOut(500);
+                    setTimeout(function() {
+                        alert("رکورد مورد نظر با موفقیت حذف شد.");
+                    }, 1000);
+                }
+            },
+            fail: function (xhr, textStatus, error) {
+                console.log('failed')
+                setTimeout(function() {
+                }, 1000);
+            }
+        });
+        return false;
+    })
+
 })(jQuery)

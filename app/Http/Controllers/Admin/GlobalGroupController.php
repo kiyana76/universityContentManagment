@@ -73,13 +73,12 @@ class GlobalGroupController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(GlobalGroup $group)
     {
-        dd($id);
-        $group->delete();
-        return redirect()->route('groups.index')->with([
-            'alert-title'  => 'عملیات حدف رکورد  با موفقیت انجام شد.',
-            'alert-class'  => 'success',
-        ]);
+        if ($group->delete()) {
+            return response()->json(['ok' => true], 200);
+        }
+
+        return response()->json(['ok' => false], 404);
     }
 }

@@ -9,7 +9,7 @@ class AdminAuthController extends Controller
 {
     public function showLoginForm(Request $request)
     {
-        if( \auth()->user()->isAdmin())
+        if(auth()->user() && auth()->user()->isAdmin())
             return redirect()->route('admin.dashboard');
 
         return view('admin.login');
@@ -17,7 +17,7 @@ class AdminAuthController extends Controller
 
     public function login(Request $request)
     {
-        if( \auth()->user()->isAdmin())
+        if( auth()->user() && auth()->user()->isAdmin())
             return redirect()->route('admin.dashboard');
 
         $this->validate($request, [

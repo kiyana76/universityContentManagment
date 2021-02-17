@@ -53,7 +53,13 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('groups.edit', $item->id) }}" class="btn btn-default"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('groups.destroy', $item->id) }}" class="btn btn-default"><i class="fa fa-remove"></i></a>
+                                        <a href="{{ route('groups.destroy', $item->id) }}" class="btn btn-default delete" data-id="{{ $item->id }}"><i class="fa fa-remove"></i></a>
+
+                                        {{--<form action="{{ route('groups.destroy', $item->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-remove"></i></button>
+                                        </form>--}}
                                     </td>
                                 </tr>
                             @endforeach
