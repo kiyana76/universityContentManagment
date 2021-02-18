@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGlobalGroupsTable extends Migration
+class CreateNotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateGlobalGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('global_groups', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->enum('status', array('enable', 'disable'));
+            $table->unsignedBigInteger('resource_id');
+            $table->foreign('resource_id')->references('id')->on('resources')->onDelete('cascade');
+            $table->string('teacher_name');
+            $table->integer('year');
+            $table->enum('term', ['1', '2']);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateGlobalGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('global_groups');
+        Schema::dropIfExists('notes');
     }
 }

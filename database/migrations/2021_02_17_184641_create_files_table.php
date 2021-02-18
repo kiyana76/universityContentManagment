@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGlobalGroupsTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateGlobalGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('global_groups', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug')->unique();
-            $table->enum('status', array('enable', 'disable'));
+            $table->string('file');
+            $table->unsignedBigInteger('resource_id');
+            $table->foreign('resource_id')->references('id')->on('resources')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateGlobalGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('global_groups');
+        Schema::dropIfExists('files');
     }
 }

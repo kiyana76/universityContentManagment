@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AdminAuthController;
-use \App\Http\Controllers\Admin\{DashboardController, GlobalGroupController, GlobalFieldController};
+use \App\Http\Controllers\Admin\{DashboardController, GlobalGroupController, GlobalFieldController, NoteController};
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin-manage'], function (){
         Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::resource('groups', GlobalGroupController::class)->except(['show']);
         Route::resource('fields', GlobalFieldController::class)->except(['show']);
+        Route::resource('notes', NoteController::class)->except(['show']);
     });
 });
 

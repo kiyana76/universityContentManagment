@@ -33,4 +33,8 @@ class GlobalField extends Model
     public function group() {
         return $this->belongsTo(GlobalGroup::class);
     }
+
+    public function resources() {
+        return $this->belongsToMany(Resource::class, 'field_resource', 'field_id', 'resource_id');
+    }
 }

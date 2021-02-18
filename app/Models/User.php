@@ -51,4 +51,16 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function resources() {
+        return $this->hasMany(Resource::class);
+    }
+
+    public function approving() {
+        return $this->hasMany(Resource::class, 'approve_by', 'id');
+    }
+
+    public function getFullNameAttribute() {
+        return $this->name . ' ' . $this->family;
+    }
 }
