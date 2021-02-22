@@ -5,6 +5,29 @@
     <li class="breadcrumb-item active">مدیریت جزوات</li>
 @endsection
 
+@push('styles')
+    <style>
+        .modal {
+            text-align: center;
+            padding: 0!important;
+        }
+
+        .modal:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+            margin-right: -4px; /* Adjusts for spacing */
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -65,6 +88,7 @@
                                     <td>
                                         <a href="{{ route('notes.edit', $item->id) }}" class="btn btn-default"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('notes.destroy', $item->id) }}" class="btn btn-default delete" data-id="{{ $item->id }}"><i class="fa fa-remove"></i></a>
+                                        <button class="btn btn-default" data-target = "#fileListModal{{ $item->resource->id }}" data-toggle="modal"><i class="fa fa-file"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -76,4 +100,8 @@
             </div>
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
+
+    @foreach($notes as $item)
+        @include('admin.includes.file-list-modal', ['subject' => $item])
+    @endforeach
 @endsection

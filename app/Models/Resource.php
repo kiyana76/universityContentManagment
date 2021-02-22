@@ -45,4 +45,8 @@ class Resource extends Model
     public function fields() {
         return $this->belongsToMany(GlobalField::class,'field_resource', 'resource_id', 'field_id');
     }
+
+    public function files() {
+        return $this->hasMany(File::class);
+    }
 }

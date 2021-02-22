@@ -17,7 +17,7 @@ class CreateResourcesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->enum('type', ['note', 'question', 'book', 'exam', 'video']);
+            $table->enum('type', ['Note', 'Question', 'Book', 'Exam', 'Video']);
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->integer('download_count')->default(0);

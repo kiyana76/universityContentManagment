@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\GlobalField;
 use App\Models\Note;
 use App\Models\Resource;
+use App\Utilities\FileUploader\Uploader;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
     public function index() {
+        //when ever we use captcha in logined page you must clear captcha variable in session
+        \Session::forget('captcha');
         $notes = Note::all();
         return view('admin.pages.Note.manage', compact('notes'));
     }
@@ -46,6 +49,7 @@ class NoteController extends Controller
         $resourceData = $request->only($resourceFields);
 
         $resourceData['user_id'] = auth()->user()->id;
+        $resourceData['type'] = 'Note';
 
         if($resourceData['status'] == 'approve') {
             $resourceData['approve_by'] = auth()->user()->id;
@@ -64,7 +68,11 @@ class NoteController extends Controller
 
     public function edit(Note $note) {
         $fields = GlobalField::where('status', 'enable')->get();
-        return view('admin.pages.Note.update', compact('note', 'fields'));
+        $fields_id = [];
+        foreach ($note->resource->fields as $i) {
+            $fields_id [] = $i->id;
+        }
+        return view('admin.pages.Note.update', compact('note', 'fields', 'fields_id'));
     }
 
     public function update(Request $request, Note $note) {
@@ -110,7 +118,7 @@ class NoteController extends Controller
 
     public function destroy(Note $note) {
         $resource = $note->resource;
-        if ($note->delete() && $resource->delete()) {
+        if ($note->delete()) {
             return response()->json(['ok' => true], 200);
         }
 

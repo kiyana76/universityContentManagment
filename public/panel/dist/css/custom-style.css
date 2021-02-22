@@ -271,3 +271,10 @@ ul {
 .datepicker-plot-area {
     font-family: 'Vazir', sans-serif;
 }
+
+.hint-message {
+    color: red;
+    font-size: 11px;
+    text-align: right;
+    margin: 4px;
+}

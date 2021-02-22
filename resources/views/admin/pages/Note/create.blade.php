@@ -80,7 +80,7 @@
                     <div class="form-group">
                         <label for="field_id"> رشته تحصیلی مربوطه </label>
                         <div class="col-sm-12">
-                            <select class="form-control select2" name="field_id">
+                            <select class="form-control select2" name="field_id[]" multiple required>
                                 <option value="">انتخاب کنید</option>
                                 @foreach($fields as $item)
                                     <option value="{{ $item->id }}">{{ $item->full_name }}</option>
