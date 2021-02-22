@@ -34,6 +34,10 @@ class Resource extends Model
         return $this->hasOne(Note::class);
     }
 
+    public function question() {
+        return $this->hasOne(Question::class);
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
     }

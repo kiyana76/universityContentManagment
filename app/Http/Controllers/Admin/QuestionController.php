@@ -4,27 +4,26 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\GlobalField;
-use App\Models\Note;
+use App\Models\Question;
 use App\Models\Resource;
-use App\Utilities\FileUploader\Uploader;
 use Illuminate\Http\Request;
 
-class NoteController extends Controller
+class QuestionController extends Controller
 {
     public function index() {
         //when ever we use captcha in logined page you must clear captcha variable in session
         \Session::forget('captcha');
-        $notes = Note::all();
-        return view('admin.pages.Note.manage', compact('notes'));
+        $questions = Question::all();
+        return view('admin.pages.Question.manage', compact('questions'));
     }
 
     public function create() {
         $fields = GlobalField::where('status', 'enable')->get();
-        return view('admin.pages.Note.create', compact('fields'));
+        return view('admin.pages.Question.create', compact('fields'));
     }
 
     public function store(Request $request) {
-        $noteFields = [
+        $questionFields = [
             'teacher_name',
             'year',
             'term',
@@ -45,39 +44,39 @@ class NoteController extends Controller
 
         $this->validate($request, $rules);
 
-        $noteData = $request->only($noteFields);
+        $questionData = $request->only($questionFields);
         $resourceData = $request->only($resourceFields);
 
         $resourceData['user_id'] = auth()->user()->id;
-        $resourceData['type'] = 'Note';
+        $resourceData['type'] = 'Question';
 
         if($resourceData['status'] == 'approve') {
             $resourceData['approve_by'] = auth()->user()->id;
         }
 
         $resource = Resource::create($resourceData);
-        $resource->note()->create($noteData);
+        $resource->question()->create($questionData);
         $resource->fields()->attach($request->field_id);
 
-        return redirect()->route('notes.index')->with([
+        return redirect()->route('questions.index')->with([
             'alert-title'  => 'عملیات ایجاد رکورد با موفقیت انجام شد.',
             'alert-class'  => 'success',
         ]);
 
     }
 
-    public function edit(Note $note) {
+    public function edit(Question $question) {
         $fields = GlobalField::where('status', 'enable')->get();
         $fields_id = [];
-        foreach ($note->resource->fields as $i) {
+        foreach ($question->resource->fields as $i) {
             $fields_id [] = $i->id;
         }
-        return view('admin.pages.Note.update', compact('note', 'fields', 'fields_id'));
+        return view('admin.pages.Question.update', compact('question', 'fields', 'fields_id'));
     }
 
-    public function update(Request $request, Note $note) {
-        $resource = $note->resource;
-        $noteFields = [
+    public function update(Request $request, Question $question) {
+        $resource = $question->resource;
+        $questionFields = [
             'teacher_name',
             'year',
             'term',
@@ -98,7 +97,7 @@ class NoteController extends Controller
 
         $this->validate($request, $rules);
 
-        $noteData = $request->only($noteFields);
+        $questionData = $request->only($questionFields);
         $resourceData = $request->only($resourceFields);
 
         $resourceData['user_id'] = auth()->user()->id;
@@ -107,23 +106,21 @@ class NoteController extends Controller
             $resourceData['approve_by'] = auth()->user()->id;
         }
         $resource->update($resourceData);
-        $note->update($noteData);
+        $question->update($questionData);
         $resource->fields()->sync($request->field_id);
 
-        return redirect()->route('notes.index')->with([
+        return redirect()->route('questions.index')->with([
             'alert-title'  => 'عملیات ایجاد رکورد با موفقیت انجام شد.',
             'alert-class'  => 'success',
         ]);
     }
 
-    public function destroy(Note $note) {
-        $resource = $note->resource;
-        if ($note->resource->files()->delete() && $note->delete() && $resource->delete()) {
+    public function destroy(Question $question) {
+        $resource = $question->resource;
+        if ($question->resource->files()->delete() && $question->delete() && $resource->delete()) {
             return response()->json(['ok' => true], 200);
         }
 
         return response()->json(['ok' => false], 404);
     }
-
-
 }

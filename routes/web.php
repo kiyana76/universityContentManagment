@@ -3,11 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\{CaptchaServiceController,
-                                DashboardController,
-                                GlobalGroupController,
-                                GlobalFieldController,
-                                NoteController,
-                                ResourceController};
+    DashboardController,
+    GlobalGroupController,
+    GlobalFieldController,
+    NoteController,
+    QuestionController,
+    ResourceController};
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::group(['prefix' => 'admin-manage'], function (){
         Route::resource('groups', GlobalGroupController::class)->except(['show']);
         Route::resource('fields', GlobalFieldController::class)->except(['show']);
         Route::resource('notes', NoteController::class)->except(['show']);
+        Route::resource('questions', QuestionController::class)->except(['show']);
         Route::post('resource/upload/{resource}', [ResourceController::class, 'uploadFile'])->name('admin.resource.upload');
         Route::delete('resource/upload/{file}', [ResourceController::class, 'deleteFile'])->name('admin.resource.delete');
 

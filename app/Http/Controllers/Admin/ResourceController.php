@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\File;
 use App\Models\Note;
+use App\Models\Question;
 use App\Models\Resource;
 use App\Utilities\FileUploader\Uploader;
 use Illuminate\Http\Request;
@@ -29,6 +30,13 @@ class ResourceController extends Controller
                     ->create()
                     ->address();
                 break;
+            case 'Question':
+                $address = Uploader::setModel(Question::class)
+                    ->setType('file')
+                    ->setMax('5000000')
+                    ->setInputName('file')
+                    ->create()
+                    ->address();
         }
 
         if(!$address)
@@ -46,9 +54,6 @@ class ResourceController extends Controller
     }
 
     public function deleteFile(File $file) {
-        if(\Illuminate\Support\Facades\File::exists('storage/' . $file->file)) {
-            \Illuminate\Support\Facades\File::delete('storage/' . $file->file);
-        }
 
         if($file->delete())
             return response()->json(['ok' => true], 200);
