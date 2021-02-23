@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{Book, Resource, File, Note, Question};
+use App\Models\{Book, Exam, Resource, File, Note, Question};
 use App\Utilities\FileUploader\Uploader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -47,6 +47,14 @@ class ResourceController extends Controller
                 $address = Uploader::setModel(Book::class)
                     ->setType('file')
                     ->setMax('30720')
+                    ->setInputName('file')
+                    ->create()
+                    ->address();
+                break;
+            case 'Exam':
+                $address = Uploader::setModel(Exam::class)
+                    ->setType('file')
+                    ->setMax('5120')
                     ->setInputName('file')
                     ->create()
                     ->address();

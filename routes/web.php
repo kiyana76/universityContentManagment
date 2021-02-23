@@ -5,6 +5,7 @@ use \App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\{BookController,
     CaptchaServiceController,
     DashboardController,
+    ExamController,
     GlobalGroupController,
     GlobalFieldController,
     NoteController,
@@ -34,6 +35,7 @@ Route::group(['prefix' => 'admin-manage'], function (){
         Route::resource('notes', NoteController::class)->except(['show']);
         Route::resource('questions', QuestionController::class)->except(['show']);
         Route::resource('books', BookController::class)->except(['show']);
+        Route::resource('exams', ExamController::class)->except(['show']);
         Route::post('resource/upload/{resource}', [ResourceController::class, 'uploadFile'])->name('admin.resource.upload');
         Route::delete('resource/upload/{file}', [ResourceController::class, 'deleteFile'])->name('admin.resource.delete');
 

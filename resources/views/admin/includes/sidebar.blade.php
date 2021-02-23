@@ -74,6 +74,12 @@
                                     <p>کتب</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('exams.index') }}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>سوالات کنکور</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-header">مثال‌ها</li>
