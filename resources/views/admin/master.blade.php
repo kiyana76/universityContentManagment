@@ -33,6 +33,8 @@
     <link rel="stylesheet" href="{{ url('panel/dist/css/custom-style.css') }}">
     <!--SELECT2-->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!--Data Table-->
+    <link rel="stylesheet" href="{{ url('panel/plugins/datatables/jquery.dataTables.min.css') }}">
 
     @stack('styles')
 
@@ -128,6 +130,10 @@
 <script src="{{ url('panel/dist/js/demo.js') }}"></script>
 <!-- SELECT2 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!--Data Table-->
+<script src="{{ url('panel/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<!-- Persian plugin for datatable-->
+<script src="https://cdn.datatables.net/plug-ins/1.10.22/i18n/Persian.json"></script>
 @stack('scripts')
 
 </body>
