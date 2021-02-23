@@ -1,15 +1,15 @@
 @extends('admin.master')
-@section('header_title', 'ایجاد جزوه')
+@section('header_title', 'ویرایش کتاب')
 @section('breadcrumb-items')
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">صفحه اصلی</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('notes.index') }}">مدیریت جزوه ها</a></li>
-    <li class="breadcrumb-item active">ایجاد جزوه</li>
+    <li class="breadcrumb-item"><a href="{{ route('books.index') }}">مدیریت کتب</a></li>
+    <li class="breadcrumb-item active">ویرایش کتاب</li>
 @endsection
 
 @section('content')
     <div class="card card-default">
         <div class="card-header">
-            <h3 class="card-title">ایجاد جزوه</h3>
+            <h3 class="card-title">ویرایش کتاب</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -17,63 +17,48 @@
             </div>
         </div>
 
-        <form method="POST" role="form" action="{{ route('notes.store') }}">
+        <form method="POST" role="form" action="{{ route('books.update', $book->id) }}">
             @csrf
+            @method('PUT')
             <div class="card-body">
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        <label for="title">عنوان جزوه</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="عنوان" required>
+                        <label for="title">عنوان کتاب</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="عنوان" value="{{ $book->resource->title }}" required>
                     </div>
 
                     <div class="form-group col-sm-6">
                         <label>وضعیت</label>
                         <div class="form-check">
                             <input name="status" type="hidden" value="">
-                            <input id="approve" name="status" class="form-check-input" type="radio" value="approve" required>
+                            <input id="approve" name="status" class="form-check-input" type="radio" value="approve" required {{ $book->resource->status == 'approve' ? 'checked' : '' }}>
                             <label for="approve" class="form-check-label">تایید شده</label>
                         </div>
                         <div class="form-check">
-                            <input id="pending" name="status" class="form-check-input" type="radio" value="pending">
+                            <input id="pending" name="status" class="form-check-input" type="radio" value="pending" {{ $book->resource->status == 'pending' ? 'checked' : '' }}>
                             <label for="pending" class="form-check-label">در انتظار تایید</label>
                         </div>
                     </div>
 
                     <div class="form-group col-sm-6">
                         <label for="description">توضیحات</label>
-                        <input class="form-control" id="description" name="description" type="text" placeholder="توضیحات">
+                        <input class="form-control" id="description" name="description" type="text" placeholder="توضیحات" value="{{ $book->resource->description }}">
                     </div>
 
                     <div class="form-group col-sm-6">
-                        <label for="teacher_name">نام استاد</label>
-                        <input class="form-control" id="teacher_name" name="teacher_name" type="text" placeholder="نام استاد">
+                        <label for="writer">نام نویسنده</label>
+                        <input class="form-control" id="writer" name="writer" type="text" placeholder="نام نویسنده" value="{{ $book->writer }}">
                     </div>
 
                     <div class="form-group col-sm-6">
-                        <label for="year">سال تحصیلی</label>
-                        <div class="col-sm-12">
-                            <select class="form-control select2" name="year" id="year" style="width: 50%">
-                                <option value="1394">۱۳۹۴</option>
-                                <option value="1395">۱۳۹۵</option>
-                                <option value="1396">۱۳۹۶</option>
-                                <option value="1397">۱۳۹۷</option>
-                                <option value="1398">۱۳۹۸</option>
-                                <option value="1399">۱۳۹۹</option>
-                                <option value="1400">۱۴۰۰</option>
-                            </select>
-                        </div>
+                        <label for="publisher">نام انتشارات</label>
+                        <input class="form-control" id="publisher" name="publisher" type="text" placeholder="نام انتشارات" value="{{ $book->publisher }}">
                     </div>
 
                     <div class="form-group col-sm-6">
-                        <label>ترم</label>
+                        <label>ویرایش</label>
                         <div class="form-check">
-                            <input name="term" type="hidden" value="">
-                            <input id="1" name="term" class="form-check-input" type="radio" value="1" required>
-                            <label for="1" class="form-check-label">۱</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="2" name="term" class="form-check-input" type="radio" value="2">
-                            <label for="2" class="form-check-label">۲</label>
+                            <input id="edit" name="edit" class="form-check-input" type="number" required value="{{ $book->edit }}">
                         </div>
                     </div>
 
@@ -82,7 +67,7 @@
                         <div class="col-sm-12">
                             <select class="form-control select2" name="field_id[]" multiple required>
                                 @foreach($fields as $item)
-                                    <option value="{{ $item->id }}">{{ $item->full_name }}</option>
+                                    <option value="{{ $item->id }}" {{ in_array($item->id, $fields_id) ? 'selected' : '' }}>{{ $item->full_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -104,7 +89,5 @@
                 dir: 'rtl',
             });
         });
-
-        $('#year').val('1399');
     </script>
 @endpush

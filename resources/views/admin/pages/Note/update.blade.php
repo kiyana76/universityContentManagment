@@ -82,7 +82,6 @@
                         <label for="field_id"> رشته تحصیلی مربوطه </label>
                         <div class="col-sm-12">
                             <select class="form-control select2" name="field_id[]" required multiple>
-                                <option value="">انتخاب کنید</option>
                                 @foreach($fields as $item)
                                     <option value="{{ $item->id }}" {{ in_array($item->id, $fields_id) ? 'selected' : '' }}>{{ $item->full_name }}</option>
                                 @endforeach

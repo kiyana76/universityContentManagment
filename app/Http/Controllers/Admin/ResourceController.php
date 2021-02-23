@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\File;
-use App\Models\Note;
-use App\Models\Question;
-use App\Models\Resource;
+use App\Models\{Book, Resource, File, Note, Question};
 use App\Utilities\FileUploader\Uploader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +22,7 @@ class ResourceController extends Controller
             case 'Note':
                 $address = Uploader::setModel(Note::class)
                     ->setType('file')
-                    ->setMax('5000000')
+                    ->setMax('5120')
                     ->setInputName('file')
                     ->create()
                     ->address();
@@ -33,10 +30,28 @@ class ResourceController extends Controller
             case 'Question':
                 $address = Uploader::setModel(Question::class)
                     ->setType('file')
-                    ->setMax('5000000')
+                    ->setMax('5120')
                     ->setInputName('file')
                     ->create()
                     ->address();
+                break;
+            case 'Book':
+                //beacuase each book can have one file
+                $file = $resource->files()->first();
+                if ($file) {
+                    return redirect()->back()->with([
+                        'alert-title'  => 'به علت وجود یک فایل برای این کتاب امکان بارگذاری فایل دیگری وجود ندارد.',
+                        'alert-class'  => 'danger',
+                    ]);
+                }
+                $address = Uploader::setModel(Book::class)
+                    ->setType('file')
+                    ->setMax('30720')
+                    ->setInputName('file')
+                    ->create()
+                    ->address();
+                break;
+
         }
 
         if(!$address)

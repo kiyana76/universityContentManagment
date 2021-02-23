@@ -15,6 +15,11 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('resource_id');
+            $table->foreign('resource_id')->on('resources')->references('id')->onDelete('cascade');
+            $table->string('writer');
+            $table->string('publisher');
+            $table->integer('edit');
             $table->timestamps();
         });
     }

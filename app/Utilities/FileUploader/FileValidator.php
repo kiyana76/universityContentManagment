@@ -13,9 +13,8 @@ class FileValidator
     public function image($inputName, int $max)
     {
         $role = [
-             $inputName => "required|image|mimes:jpeg,jpg,png,gif" . "|max:{$max}",
+             $inputName => "required|image|mimes:jpeg,jpg,png,gif|max:" . $max,
         ];
-
         $validator = Validator::make(request()->only($inputName), $role);
 
         if ($validator->fails()) {
@@ -34,7 +33,7 @@ class FileValidator
 
     public function file($inputName, int $max) {
         $role = [
-            $inputName . '.*' => "required|mimes:pdf,zip,rar" . "|max:{$max}",
+            $inputName => "required|file|mimes:pdf,zip,rar|max:" . $max,
         ];
 
         $validator = Validator::make(request()->only($inputName), $role);

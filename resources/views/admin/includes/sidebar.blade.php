@@ -68,6 +68,12 @@
                                     <p>نمونه سوالات</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('books.index') }}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>کتب</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-header">مثال‌ها</li>

@@ -1,15 +1,15 @@
 @extends('admin.master')
-@section('header_title', 'ایجاد جزوه')
+@section('header_title', 'ایجاد کتاب')
 @section('breadcrumb-items')
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">صفحه اصلی</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('notes.index') }}">مدیریت جزوه ها</a></li>
-    <li class="breadcrumb-item active">ایجاد جزوه</li>
+    <li class="breadcrumb-item"><a href="{{ route('books.index') }}">مدیریت کتب</a></li>
+    <li class="breadcrumb-item active">ایجاد کتاب</li>
 @endsection
 
 @section('content')
     <div class="card card-default">
         <div class="card-header">
-            <h3 class="card-title">ایجاد جزوه</h3>
+            <h3 class="card-title">ایجاد کتاب</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -17,12 +17,12 @@
             </div>
         </div>
 
-        <form method="POST" role="form" action="{{ route('notes.store') }}">
+        <form method="POST" role="form" action="{{ route('books.store') }}">
             @csrf
             <div class="card-body">
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        <label for="title">عنوان جزوه</label>
+                        <label for="title">عنوان کتاب</label>
                         <input type="text" class="form-control" id="title" name="title" placeholder="عنوان" required>
                     </div>
 
@@ -45,35 +45,19 @@
                     </div>
 
                     <div class="form-group col-sm-6">
-                        <label for="teacher_name">نام استاد</label>
-                        <input class="form-control" id="teacher_name" name="teacher_name" type="text" placeholder="نام استاد">
+                        <label for="writer">نام نویسنده</label>
+                        <input class="form-control" id="writer" name="writer" type="text" placeholder="نام نویسنده">
                     </div>
 
                     <div class="form-group col-sm-6">
-                        <label for="year">سال تحصیلی</label>
-                        <div class="col-sm-12">
-                            <select class="form-control select2" name="year" id="year" style="width: 50%">
-                                <option value="1394">۱۳۹۴</option>
-                                <option value="1395">۱۳۹۵</option>
-                                <option value="1396">۱۳۹۶</option>
-                                <option value="1397">۱۳۹۷</option>
-                                <option value="1398">۱۳۹۸</option>
-                                <option value="1399">۱۳۹۹</option>
-                                <option value="1400">۱۴۰۰</option>
-                            </select>
-                        </div>
+                        <label for="publisher">نام انتشارات</label>
+                        <input class="form-control" id="publisher" name="publisher" type="text" placeholder="نام انتشارات">
                     </div>
 
                     <div class="form-group col-sm-6">
-                        <label>ترم</label>
+                        <label>ویرایش</label>
                         <div class="form-check">
-                            <input name="term" type="hidden" value="">
-                            <input id="1" name="term" class="form-check-input" type="radio" value="1" required>
-                            <label for="1" class="form-check-label">۱</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="2" name="term" class="form-check-input" type="radio" value="2">
-                            <label for="2" class="form-check-label">۲</label>
+                            <input id="edit" name="edit" class="form-check-input" type="number" required>
                         </div>
                     </div>
 
@@ -104,7 +88,5 @@
                 dir: 'rtl',
             });
         });
-
-        $('#year').val('1399');
     </script>
 @endpush

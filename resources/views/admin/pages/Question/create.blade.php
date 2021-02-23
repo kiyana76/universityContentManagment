@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('header_title', 'ایجاد جزوه')
+@section('header_title', 'ایجاد نمونه سوال')
 @section('breadcrumb-items')
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">صفحه اصلی</a></li>
     <li class="breadcrumb-item"><a href="{{ route('questions.index') }}">مدیریت نمونه سوال ها</a></li>
@@ -81,7 +81,6 @@
                         <label for="field_id"> رشته تحصیلی مربوطه </label>
                         <div class="col-sm-12">
                             <select class="form-control select2" name="field_id[]" multiple required>
-                                <option value="">انتخاب کنید</option>
                                 @foreach($fields as $item)
                                     <option value="{{ $item->id }}">{{ $item->full_name }}</option>
                                 @endforeach

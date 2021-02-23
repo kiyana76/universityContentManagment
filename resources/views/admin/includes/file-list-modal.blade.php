@@ -20,7 +20,14 @@
                                         <input type="file" class="custom-file-input" id="file" name="file">
                                         <label class="custom-file-label float-right" for="file">انتخاب فایل</label>
                                     </div>
-                                    <span class="col-sm-12 hint-message">*تنها مجاز به بارگذاری PDF,ZIP,RAR با حداکثر حجم 5M می‌باشید.</span>
+                                    @switch($subject->resource->type)
+                                        @case('Book')
+                                            <span class="col-sm-12 hint-message">*تنها مجاز به بارگذاری PDF,ZIP,RAR با حداکثر حجم 30M می‌باشید.</span>
+                                            @break
+                                        @default
+                                            <span class="col-sm-12 hint-message">*تنها مجاز به بارگذاری PDF,ZIP,RAR با حداکثر حجم 5M می‌باشید.</span>
+                                            @break
+                                    @endswitch
                                 </div>
                             </div>
                             <div class="form-group captcha" style="float: right">
