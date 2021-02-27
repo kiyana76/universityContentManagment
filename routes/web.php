@@ -74,6 +74,7 @@ Route::group(['namespace' => 'Auth'], function () {
 /*Auth::routes(['verify' => true]);*/
 
 Route::get('home', function () {
+    auth()->logout();
     echo 'miad';
     echo Auth::user()->full_name;
 });

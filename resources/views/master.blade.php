@@ -83,6 +83,19 @@
     <main id="mainContent" class="main-content">
         <div class="page-container ptb-60">
             <div class="container">
+                @if(session('alert-title'))
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mrl-10 alert alert-{{session('alert-class')}} alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <strong>{{session('alert-title')}}</strong>
+                                @if(session('alert-message'))
+                                    <p>{{session('alert-message')}}</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endif
                 @if ($errors->any())
                     @foreach ($errors->all() as $error)
                         <div class="alert alert-danger">{{ $error }}</div>

@@ -1,73 +1,59 @@
-@extends('layouts.app')
+@extends('master')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <section class="sign-area panel p-40">
+        @php
+            $email_link = Session::get('enable_email_btn');
+            $exist_user_email = Session::get('exist_user_email');
+        @endphp
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+        @isset($email_link)
+            <div class="mb-10">
+                <form action="{{ route('send.verify.email') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="exist_user_email" value="{{ $exist_user_email }}">
+                    <button type="submit" class="btn-block btn btn-success mb-10">ارسال مجدد لینک فعال سازی</button>
+                </form>
+            </div>
+        @endisset
+        <h3 class="sign-title">ورود <small>یا <a href="{{ route('register') }}" class="color-green">ساخت حساب جدید</a></small></h3>
+        <div class="row row-rl-0">
+            <div class="col-sm-6 col-md-7 col-right">
+                <form class="p-40" action="{{ route('login') }}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label class="sr-only">پست الکترونیکی</label>
+                        <input type="email" id="email" name="email" class="form-control input-lg" placeholder="پست الکترونیکی">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">رمز ورود</label>
+                        <input type="password" id="password" name="password" class="form-control input-lg" placeholder="رمز ورود">
+                    </div>
+                    <div class="form-group">
+                        <a href="{{ route('password.request') }}" class="forgot-pass-link color-green">رمز عبور خود را فراموش کرده اید؟</a>
+                    </div>
+                    <div class="custom-checkbox mb-20">
+                        <input type="checkbox" id="remember_account" checked>
+                        <label class="color-mid" for="remember_account">مرا به خاطر بسپار</label>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-lg">ورود</button>
+                </form>
+                <span class="or">یا</span>
+            </div>
+            <div class="col-sm-6 col-md-5 col-left">
+                <div class="social-login p-40">
+                    <div class="mb-20">
+                        <button class="btn btn-lg btn-block btn-social btn-google-plus"><i class="fa fa-google-plus"></i>ورود با حساب گوگل</button>
+                    </div>
+                    <div class="custom-checkbox mb-20">
+                        <input type="checkbox" id="remember_social" checked>
+                        <label class="color-mid" for="remember_social">مرا به خاطر بسپار</label>
+                    </div>
+                    <div class="text-center color-mid">
+                        حساب کاربری ندارید؟ <a href="{{ route('register') }}" class="color-green">ساخت حساب</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 @endsection
