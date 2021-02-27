@@ -6,7 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Rules\mobileChecker;
+use Auth;
+use Carbon\Carbon;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -51,10 +56,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'min:3'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'family' => ['required', 'string'],
+            'family' => ['required', 'string', 'min:3', 'max:255'],
             'mobile' => [new mobileChecker]
         ]);
     }
@@ -67,13 +72,49 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $data['verification_token'] = str_random(16);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'family' => $data['family'],
             'mobile' => $data['mobile'],
+            'verification_token' => $data['verification_token'],
             'type' => 'user'
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 201)
+            : redirect($this->redirectPath());
+    }
+
+    public function verifyEmail($token) {
+        // check user token and current status
+        $user = User::where('verification_token', $token)
+            ->whereNull('email_verified_at')
+            ->firstOrFail();
+
+        $user->email_verified_at = Carbon::now();
+        $user->verification_token = null;
+        $user->save();
+
+        auth()->login($user,true);
+
+        return redirect($this->redirectTo);
+    }
+
+    public function sendVerifyEmail() {
+
     }
 }

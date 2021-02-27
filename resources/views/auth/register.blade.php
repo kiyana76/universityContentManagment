@@ -1,106 +1,57 @@
-@extends('layouts.app')
-
+@extends('master')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <label for="family" class="col-md-4 col-form-label text-md-right">family</label>
-
-                            <div class="col-md-6">
-                                <input id="family" type="text" class="form-control @error('family') is-invalid @enderror" name="family" value="{{ old('family') }}" required autocomplete="family" autofocus>
-
-                                @error('family')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="mobile" class="col-md-4 col-form-label text-md-right">mobile</label>
-
-                            <div class="col-md-6">
-                                <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" autocomplete="mobile" autofocus>
-
-                                @error('mobile')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <section class="sign-area panel p-40">
+        <h3 class="sign-title">ثبت نام <small>یا <a href="{{ route('login') }}" class="color-green">ورود</a></small></h3>
+        <div class="row row-rl-0">
+            <div class="col-sm-6 col-md-7 col-right">
+                <form class="p-40" action="{{ route('register') }}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label class="sr-only">نام</label>
+                        <input type="text" name="name" id="name" class="form-control input-lg" placeholder="نام">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">نام خانوادگی</label>
+                        <input type="text" name="family" id="family" class="form-control input-lg" placeholder="نام خانوادگی">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">پست الکترونیکی</label>
+                        <input type="email" name="email" id="email" class="form-control input-lg" placeholder="پست الکترونیکی">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">موبایل</label>
+                        <input type="number" name="mobile" id="mobile" class="form-control input-lg" placeholder="موبایل">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">رمز عبور</label>
+                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="رمز عبور">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">تایید رمز عبور</label>
+                        <input type="password" id="password-confirm" name="password_confirmation" class="form-control input-lg" placeholder="تایید رمز عبور">
+                    </div>
+                    {{--<div class="custom-checkbox mb-20">
+                        <input type="checkbox" id="agree_terms">
+                        <label class="color-mid" for="agree_terms">أنا أوافق على <a href="terms_conditions.html" class="color-green">تعليمات الاستخدام</a> و <a href="terms_conditions.html" class="color-green">بيان الخصوصية</a>.</label>
+                    </div>--}}
+                    <button type="submit" class="btn btn-block btn-lg">ثبت نام</button>
+                </form>
+                <span class="or">یا</span>
+            </div>
+            <div class="col-sm-6 col-md-5 col-left">
+                <div class="social-login p-40">
+                    <div class="mb-20">
+                        <button class="btn btn-lg btn-block btn-social btn-google-plus"><i class="fa fa-google-plus"></i>ورود با گوگل</button>
+                    </div>
+                    {{--<div class="custom-checkbox mb-20">
+                        <input type="checkbox" id="remember_social" checked>
+                        <label class="color-mid" for="remember_social">احتفظ بتسجيل دخولي على هذا الحاسوب.</label>
+                    </div>--}}
+                    <div class="text-center color-mid">
+                        آیا حساب کاربری دارید؟ <a href="{{ route('login') }}" class="color-green">ورود</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 @endsection

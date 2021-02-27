@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\{BookController,
@@ -11,6 +12,7 @@ use App\Http\Controllers\Admin\{BookController,
     NoteController,
     QuestionController,
     ResourceController};
+use App\Http\Controllers\Auth\{ForgotPasswordController, RegisterController, LoginController, ResetPasswordController};
 
 /*
 |--------------------------------------------------------------------------
@@ -44,8 +46,34 @@ Route::group(['prefix' => 'admin-manage'], function (){
     });
 });
 
-Auth::routes();
+Route::group(['namespace' => 'Auth'], function () {
+    //register
+    Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('register', [RegisterController::class, 'register']);
+
+    //login
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [LoginController::class, 'login']);
+
+    //logout
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+    //reset password
+    Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+    //verify email
+    Route::get('verify/{token}', [RegisterController::class, 'verifyEmail'])
+        ->where(['token' => '([a-zA-Z0-9]{16})'])
+        ->name('verify');
+    Route::post('send/verify-email', [RegisterController::class, 'sendVerifyEmail'])->name('send.verify.email');
+});
+
+/*Auth::routes(['verify' => true]);*/
 
 Route::get('home', function () {
-   dd('کاربر ساخته شد.');
+    echo 'miad';
+    echo Auth::user()->full_name;
 });

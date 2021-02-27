@@ -84,7 +84,7 @@
                     </li>
                     <li class="nav-header">مثال‌ها</li>
                     <li class="nav-item">
-                        <a href="pages/calendar.html" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fa fa-calendar"></i>
                             <p>
                                 تقویم
@@ -102,19 +102,19 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>اینباکس</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/mailbox/compose.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>ایجاد</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/mailbox/read-mail.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>خواندن</p>
                                 </a>
@@ -131,31 +131,31 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/examples/invoice.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>سفارشات</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/examples/profile.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>پروفایل</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/examples/login.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>صفحه ورود</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/examples/register.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>صفحه عضویت</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/examples/lockscreen.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>قفل صفحه</p>
                                 </a>
@@ -172,25 +172,25 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/examples/404.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>ارور 404</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/examples/500.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>ارور 500</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/examples/blank.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>صفحه خالی</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="starter.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="fa fa-circle-o nav-icon"></i>
                                     <p>صفحه شروع</p>
                                 </a>
