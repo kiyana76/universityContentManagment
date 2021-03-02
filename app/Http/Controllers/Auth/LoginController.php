@@ -64,4 +64,11 @@ class LoginController extends Controller
             ? new JsonResponse([], 204)
             : redirect()->intended($this->redirectPath());
     }
+
+    public function logout()
+    {
+        $this->guard()->logout();
+
+        return redirect($this->redirectTo);
+    }
 }

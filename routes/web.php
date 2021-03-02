@@ -62,7 +62,7 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('login', [LoginController::class, 'login']);
 
     //logout
-    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
     //reset password
     Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');

@@ -25,11 +25,27 @@
                         </form>
                     </div>
                     <div class="col-sm-4 t-xs-center t-md-left">
-                        <div class="header-wishlist mr-20">
-                            <a href="signin.html">
-                                <span class="icon lnr lnr-user font-30"></span>
-                            </a>
-                        </div>
+                        @if(auth()->user())
+                            <div class="header-wishlist mr-20">
+                                    <a href="#">
+                                        <span style="vertical-align: sub">{{ auth()->user()->full_name }}</span>
+                                        <span class="icon lnr lnr-user font-30"></span>
+                                    </a>
+                            </div>
+                            <div class="header-wishlist mr-20">
+                                <a href="{{ route('logout') }}">
+                                    <span style="vertical-align: sub">خروج</span>
+                                    <span class="icon lnr lnr-power-switch font-30"></span>
+                                </a>
+                            </div>
+                        @else
+                            <div class="header-wishlist mr-20">
+                                <a href="{{ route('login') }}">
+                                    <span style="vertical-align: sub">ورود</span>
+                                    <span class="icon lnr lnr-user font-30"></span>
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

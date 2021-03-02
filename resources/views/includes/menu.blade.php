@@ -10,7 +10,10 @@
             </div>
             <div id="header-navbar" class="nav-collapse">
                 <ul class="nav-menu">
-                    <li class="active">
+                    <li class="{{ url()->current() == route('home') ? 'active' : '' }}">
+                        <a href="{{ route('home') }}">صفحه اصلی</a>
+                    </li>
+                    <li>
                         <a href="index.html">جزوات</a>
                     </li>
                     <li>
@@ -31,7 +34,11 @@
                 </ul>
             </div>
             <div class="nav-menu nav-menu-fixed">
-                <a href="#">حساب کاربری</a>
+                @if(auth()->user())
+                    <a href="#">منوی کاربر</a>
+                @else
+                    <a href="{{ route('register') }}">ایجاد حساب کاربری</a>
+                @endif
             </div>
         </nav>
     </div>
