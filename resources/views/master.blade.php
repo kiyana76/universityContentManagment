@@ -41,6 +41,7 @@
     <!-- Include CSS Filess                        -->
     <!-- ––––––––––––––––––––––––––––––––––––––––– -->
     <link href="{{ url('css/style.css') }}" rel="stylesheet">
+    @stack('styles')
 </head>
 
 <body id="body" class="wide-layout preloader-active">
@@ -122,6 +123,7 @@
 <!-- SCRIPTS                                   -->
 <!-- ––––––––––––––––––––––––––––––––––––––––– -->
 <script type="text/javascript" rel="script" src="{{ asset('js/script.js') }}"></script>
+@stack('scripts')
 </body>
 
 </html>

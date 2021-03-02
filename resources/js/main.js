@@ -227,7 +227,7 @@
     /*-------------------------------------
      Carousel slider initiation
     -------------------------------------*/
-    var owl_carousel = function() {
+    /*var owl_carousel = function() {
         $('.owl-slider').each(function () {
             var carousel = $(this),
                 autoplay_hover_pause = carousel.data('autoplay-hover-pause'),
@@ -303,7 +303,7 @@
             });
 
         });
-    };
+    };*/
 
     /*-------------------------------------
      Flexslider
@@ -421,7 +421,7 @@
             navbar_js();
             share_social();
             add_favorite();
-            owl_carousel();
+            /*owl_carousel();*/
             toogle_class();
             countdown();
             data_rating();

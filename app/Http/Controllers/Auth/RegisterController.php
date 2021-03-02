@@ -114,7 +114,18 @@ class RegisterController extends Controller
         return redirect($this->redirectTo);
     }
 
-    public function sendVerifyEmail() {
+    public function sendVerifyEmail(Request $request) {
+        $user = User::whereEmail($request->user_email)->firstOrFail();
+        if($user->hasVerifiedEmail()) {
+            auth()->login($user);
+        }
+
+        event(new Registered($user));
+
+        return back()->with([
+            'alert-title'  => 'ایمیل فعالسازی حساب کاربری شما ارسال شد.',
+            'alert-class'  => 'success',
+        ]);
 
     }
 }

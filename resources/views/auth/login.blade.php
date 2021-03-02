@@ -4,14 +4,14 @@
     <section class="sign-area panel p-40">
         @php
             $email_link = Session::get('enable_email_btn');
-            $exist_user_email = Session::get('exist_user_email');
+            $user_email = Session::get('user_email');
         @endphp
 
         @isset($email_link)
             <div class="mb-10">
                 <form action="{{ route('send.verify.email') }}" method="post">
                     @csrf
-                    <input type="hidden" name="exist_user_email" value="{{ $exist_user_email }}">
+                    <input type="hidden" name="user_email" value="{{ $user_email }}">
                     <button type="submit" class="btn-block btn btn-success mb-10">ارسال مجدد لینک فعال سازی</button>
                 </form>
             </div>
@@ -23,11 +23,11 @@
                     @csrf
                     <div class="form-group">
                         <label class="sr-only">پست الکترونیکی</label>
-                        <input type="email" id="email" name="email" class="form-control input-lg" placeholder="پست الکترونیکی">
+                        <input type="email" id="email" name="email" class="form-control input-lg" placeholder="پست الکترونیکی" required autocomplete="email" value="{{ old('email') }}">
                     </div>
                     <div class="form-group">
                         <label class="sr-only">رمز ورود</label>
-                        <input type="password" id="password" name="password" class="form-control input-lg" placeholder="رمز ورود">
+                        <input type="password" id="password" name="password" class="form-control input-lg" placeholder="رمز ورود" required>
                     </div>
                     <div class="form-group">
                         <a href="{{ route('password.request') }}" class="forgot-pass-link color-green">رمز عبور خود را فراموش کرده اید؟</a>

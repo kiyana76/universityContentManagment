@@ -12,7 +12,11 @@ use App\Http\Controllers\Admin\{BookController,
     NoteController,
     QuestionController,
     ResourceController};
-use App\Http\Controllers\Auth\{ForgotPasswordController, RegisterController, LoginController, ResetPasswordController};
+use App\Http\Controllers\Auth\{ForgotPasswordController,
+    RegisterController,
+    LoginController,
+    ResetPasswordController};
+use App\Http\Controllers\Guest\{HomeController};
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +29,7 @@ use App\Http\Controllers\Auth\{ForgotPasswordController, RegisterController, Log
 |
 */
 
+//Admin Routs
 Route::group(['prefix' => 'admin-manage'], function (){
     Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
@@ -46,6 +51,7 @@ Route::group(['prefix' => 'admin-manage'], function (){
     });
 });
 
+//Login Register Routs
 Route::group(['namespace' => 'Auth'], function () {
     //register
     Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -71,10 +77,7 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('send/verify-email', [RegisterController::class, 'sendVerifyEmail'])->name('send.verify.email');
 });
 
-/*Auth::routes(['verify' => true]);*/
-
-Route::get('home', function () {
-    auth()->logout();
-    echo 'miad';
-    echo Auth::user()->full_name;
+//Guest Routs
+Route::group(['namespace' => 'Guest'], function () {
+   Route::get('home', [HomeController::class, 'index'])->name('home');
 });

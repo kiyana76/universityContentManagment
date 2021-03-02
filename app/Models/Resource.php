@@ -61,4 +61,27 @@ class Resource extends Model
     public function files() {
         return $this->hasMany(File::class);
     }
+
+    public function scopeApprove($query) {
+        return $query->where('status', 'approve');
+    }
+
+    public function getFullNameAttribute() {
+        $title = '';
+        switch ($this->type){
+            case 'Note':
+                $title = 'جزوه ' . $this->title;
+                break;
+            case 'Question':
+                $title = 'نمونه سوال ' . $this->title;
+                break;
+            case 'Book':
+                $title = ' کتاب ' . $this->title;
+                break;
+            case 'Exam':
+                $title = $this->title;
+                break;
+        }
+        return $title;
+    }
 }
