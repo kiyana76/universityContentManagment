@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <form method="POST" role="form" action="{{ route('questions.store') }}">
+        <form method="POST" role="form" action="{{ route('questions.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="row">
@@ -77,7 +77,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-sm-6">
                         <label for="field_id"> رشته تحصیلی مربوطه </label>
                         <div class="col-sm-12">
                             <select class="form-control select2" name="field_id[]" multiple required>
@@ -85,6 +85,13 @@
                                     <option value="{{ $item->id }}">{{ $item->full_name }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="thumbnail_image">Thumbnail</label>
+                        <div class="">
+                            <input type="file" name="thumbnail_image" id="thumbnail_image">
                         </div>
                     </div>
                 </div>

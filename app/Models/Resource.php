@@ -18,6 +18,7 @@ class Resource extends Model
         'title',
         'description',
         'status',
+        'thumbnail_image',
         'approve_by',
         'approve_at'];
 

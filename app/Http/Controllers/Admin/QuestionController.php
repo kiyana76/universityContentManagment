@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\File;
 use App\Models\GlobalField;
 use App\Models\Question;
 use App\Models\Resource;
+use App\Utilities\FileUploader\Uploader;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -23,6 +25,7 @@ class QuestionController extends Controller
     }
 
     public function store(Request $request) {
+        $address = '';
         $questionFields = [
             'teacher_name',
             'year',
@@ -32,6 +35,7 @@ class QuestionController extends Controller
             'title',
             'description',
             'status',
+            'thumbnail_image',
         ];
         $rules = [
             'title' => 'required|max:100',
@@ -53,6 +57,18 @@ class QuestionController extends Controller
         if($resourceData['status'] == 'approve') {
             $resourceData['approve_by'] = auth()->user()->id;
         }
+
+        if (isset($resourceData['thumbnail_image'])) {
+            $address = Uploader::setModel(File::class)
+                ->setType('image')
+                ->setMax('1280')
+                ->setInputName('thumbnail_image')
+                ->create()
+                ->address();
+        } else {
+            $address = 'thumbnail-default.jpg';
+        }
+        $resourceData['thumbnail_image'] = $address;
 
         $resource = Resource::create($resourceData);
         $resource->question()->create($questionData);
@@ -85,6 +101,7 @@ class QuestionController extends Controller
             'title',
             'description',
             'status',
+            'thumbnail_image',
         ];
         $rules = [
             'title' => 'required|max:100',
@@ -105,6 +122,17 @@ class QuestionController extends Controller
         if($resourceData['status'] == 'approve') {
             $resourceData['approve_by'] = auth()->user()->id;
         }
+
+        if (isset($resourceData['thumbnail_image'])) {
+            $resourceData['thumbnail_image'] = Uploader::setModel(File::class)
+                ->setType('image')
+                ->setMax('1280')
+                ->setInputName('thumbnail_image')
+                ->create()
+                ->address();
+        }
+
+
         $resource->update($resourceData);
         $question->update($questionData);
         $resource->fields()->sync($request->field_id);

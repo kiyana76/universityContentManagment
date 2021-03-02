@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\File;
 use App\Models\GlobalField;
 use App\Models\Resource;
+use App\Utilities\FileUploader\Uploader;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -23,6 +25,7 @@ class BookController extends Controller
     }
 
     public function store(Request $request) {
+        $address = '';
         $bookFields = [
             'writer',
             'publisher',
@@ -32,6 +35,7 @@ class BookController extends Controller
             'title',
             'description',
             'status',
+            'thumbnail_image'
         ];
         $rules = [
             'title' => 'required|max:100',
@@ -53,6 +57,18 @@ class BookController extends Controller
         if($resourceData['status'] == 'approve') {
             $resourceData['approve_by'] = auth()->user()->id;
         }
+
+        if (isset($resourceData['thumbnail_image'])) {
+            $resourceData['thumbnail_image'] = Uploader::setModel(File::class)
+                ->setType('image')
+                ->setMax('1280')
+                ->setInputName('thumbnail_image')
+                ->create()
+                ->address();
+        } else {
+            $resourceData['thumbnail_image'] = 'thumbnail-default.jpg';
+        }
+
 
         $resource = Resource::create($resourceData);
         $resource->book()->create($bookData);
@@ -85,6 +101,7 @@ class BookController extends Controller
             'title',
             'description',
             'status',
+            'thumbnail_image'
         ];
         $rules = [
             'title' => 'required|max:100',
@@ -105,6 +122,19 @@ class BookController extends Controller
         if($resourceData['status'] == 'approve') {
             $resourceData['approve_by'] = auth()->user()->id;
         }
+
+        if (isset($resourceData['thumbnail_image'])) {
+            $resourceData['thumbnail_image'] = Uploader::setModel(File::class)
+                ->setType('image')
+                ->setMax('1280')
+                ->setInputName('thumbnail_image')
+                ->create()
+                ->address();
+        } else {
+            $resourceData['thumbnail_image'] = 'thumbnail-default.jpg';
+        }
+
+
         $resource->update($resourceData);
         $book->update($bookData);
         $resource->fields()->sync($request->field_id);

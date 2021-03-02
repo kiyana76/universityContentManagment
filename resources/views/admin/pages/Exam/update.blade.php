@@ -17,7 +17,11 @@
             </div>
         </div>
 
-        <form method="POST" role="form" action="{{ route('exams.update', $exam->id) }}">
+        <div class="col-sm-4 image card-img">
+            <img class="card-img" src="{{ url('storage/' . $exam->resource->thumbnail_image) }}">
+        </div>
+
+        <form method="POST" role="form" action="{{ route('exams.update', $exam->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="card-body">
@@ -68,6 +72,13 @@
                                     <option value="{{ $item->id }}" {{ in_array($item->id, $fields_id) ? 'selected' : '' }}>{{ $item->full_name }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="thumbnail_image">Thumbnail</label>
+                        <div class="">
+                            <input type="file" name="thumbnail_image" id="thumbnail_image">
                         </div>
                     </div>
                 </div>

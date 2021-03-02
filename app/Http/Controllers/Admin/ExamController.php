@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
+use App\Models\File;
 use App\Models\GlobalField;
 use App\Models\Resource;
+use App\Utilities\FileUploader\Uploader;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -23,6 +25,7 @@ class ExamController extends Controller
     }
 
     public function store(Request $request) {
+        $address = '';
         $examFields = [
             'year',
         ];
@@ -30,6 +33,7 @@ class ExamController extends Controller
             'title',
             'description',
             'status',
+            'thumbnail_image'
         ];
         $rules = [
             'title' => 'required|max:100',
@@ -49,6 +53,18 @@ class ExamController extends Controller
         if($resourceData['status'] == 'approve') {
             $resourceData['approve_by'] = auth()->user()->id;
         }
+
+        if (isset($resourceData['thumbnail_image'])) {
+            $address = Uploader::setModel(File::class)
+                ->setType('image')
+                ->setMax('1280')
+                ->setInputName('thumbnail_image')
+                ->create()
+                ->address();
+        } else {
+            $address = 'thumbnail-default.jpg';
+        }
+        $resourceData['thumbnail_image'] = $address;
 
         $resource = Resource::create($resourceData);
         $resource->exam()->create($examData);
@@ -79,6 +95,7 @@ class ExamController extends Controller
             'title',
             'description',
             'status',
+            'thumbnail_image'
         ];
         $rules = [
             'title' => 'required|max:100',
@@ -97,6 +114,16 @@ class ExamController extends Controller
         if($resourceData['status'] == 'approve') {
             $resourceData['approve_by'] = auth()->user()->id;
         }
+
+        if (isset($resourceData['thumbnail_image'])) {
+            $resourceData['thumbnail_image'] = Uploader::setModel(File::class)
+                ->setType('image')
+                ->setMax('1280')
+                ->setInputName('thumbnail_image')
+                ->create()
+                ->address();
+        }
+
         $resource->update($resourceData);
         $exam->update($examData);
         $resource->fields()->sync($request->field_id);

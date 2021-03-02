@@ -20,7 +20,7 @@
                 @foreach($resources as $item)
                     <div class="coupon-single panel t-center item">
                         <div class="row">
-                            <div class="col-xs-12"><img src="{{ ('images/thumbnail-default.jpg') }}"></div>
+                            <div class="col-xs-12"><img src="{{ url('storage/' . $item->thumbnail_image) }}"></div>
                             <div class="col-xs-12">
                                 <div class="panel-body">
                                     <h5 class="deal-title mb-10">
