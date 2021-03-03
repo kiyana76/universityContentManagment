@@ -41,7 +41,7 @@
 
         <div class="col-xs-12">
             <div class="panel pt-20 pb-30 prl-20 mtb-20">
-                <h3 class="h-title mb-30">کتاب‌ها</h3>
+                <h3 class="h-title mb-30"><a href="{{ route('books') }}">کتاب‌ها</a></h3>
                 <div class="row">
                     @foreach($books as $item)
                         <div class="col-sm-4">
@@ -76,7 +76,7 @@
 
         <div class="col-xs-12">
             <div class="panel pt-20 pb-30 prl-20 mtb-20">
-                <h3 class="h-title mb-30">جزوه‌ها</h3>
+                <h3 class="h-title mb-30"><a href="{{ route('notes') }}">جزوه‌ها</a></h3>
                 <div class="row">
                     @foreach($notes as $item)
                         <div class="col-sm-4">
@@ -111,7 +111,7 @@
 
         <div class="col-xs-12">
             <div class="panel pt-20 pb-30 prl-20 mtb-20">
-                <h3 class="h-title mb-30">نمونه سوالات</h3>
+                <h3 class="h-title mb-30"><a href="{{ route('questions') }}">نمونه سوالات</a></h3>
                 <div class="row">
                     @foreach($questions as $item)
                         <div class="col-sm-4">
@@ -146,7 +146,7 @@
 
         <div class="col-xs-12">
             <div class="panel pt-20 pb-30 prl-20 mtb-20">
-                <h3 class="h-title mb-30">سوالات کنکور</h3>
+                <h3 class="h-title mb-30"><a href="{{ route('exams') }}">سوالات کنکور</a></h3>
                 <div class="row">
                     @foreach($exams as $item)
                         <div class="col-sm-4">

@@ -87,14 +87,18 @@ Route::group(['namespace' => 'Guest'], function () {
 
    //Notes
     Route::get('/notes/{noteSlug}', [GuestNoteController::class, 'single'])->name('note');
+    Route::get('/notes', [GuestNoteController::class, 'list'])->name('notes');
 
     //Book
     Route::get('/books/{bookSlug}', [GuestBookController::class, 'single'])->name('book');
+    Route::get('/books', [GuestBookController::class, 'list'])->name('books');
 
     //Exam
     Route::get('/exams/{examSlug}', [GuestExamController::class, 'single'])->name('exam');
+    Route::get('/exams', [GuestExamController::class, 'list'])->name('exams');
 
     //Question
     Route::get('/questions/{questionSlug}', [GuestQuestionController::class, 'single'])->name('question');
+    Route::get('/questions', [GuestQuestionController::class, 'list'])->name('questions');
 
 });

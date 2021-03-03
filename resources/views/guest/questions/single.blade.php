@@ -1,7 +1,7 @@
 @extends('master')
 @section('breadcrumb-items')
     <li class="breadcrumb-item"><a href="{{ route('home') }}">صفحه اصلی</a></li>
-    <li class="breadcrumb-item"><a href="#">نمونه سوالات</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('questions') }}">نمونه سوالات</a></li>
     <li class="breadcrumb-item active">{{ $question->full_name }}</li>
 @endsection
 @section('content')

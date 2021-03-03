@@ -13,23 +13,17 @@
                     <li class="{{ url()->current() == route('home') ? 'active' : '' }}">
                         <a href="{{ route('home') }}">صفحه اصلی</a>
                     </li>
-                    <li>
-                        <a href="index.html">جزوات</a>
+                    <li class="{{ url()->current() == route('notes') ? 'active' : '' }}">
+                        <a href="{{ route('notes') }}">جزوات</a>
                     </li>
-                    <li>
-                        <a href="coupons_grid.html">کتب</a>
+                    <li class="{{ url()->current() == route('books') ? 'active' : '' }}">
+                        <a href="{{ route('books') }}">کتب</a>
                     </li>
-                    <li>
-                        <a href="stores_01.html">نمونه سوالات</a>
+                    <li class="{{ url()->current() == route('exams') ? 'active' : '' }}">
+                        <a href="{{ route('exams') }}">نمونه سوالات</a>
                     </li>
-                    <li>
-                        <a href="contact_us_01.html">سوالات کنکور</a>
-                    </li>
-                    <li>
-                        <a href="#">ویدیو های آموزشی</a>
-                    </li>
-                    <li>
-                        <a href="#">صفحات</a>
+                    <li class="{{ url()->current() == route('questions') ? 'active' : '' }}">
+                        <a href="{{ route('questions') }}">سوالات کنکور</a>
                     </li>
                 </ul>
             </div>
