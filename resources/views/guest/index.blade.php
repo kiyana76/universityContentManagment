@@ -25,7 +25,7 @@
                             <div class="col-xs-12">
                                 <div class="panel-body">
                                     <h5 class="deal-title mb-10">
-                                        <a href="{{ $item->slug }}">{{ $item->full_name }}</a>
+                                        <a href="{{ $item->link_address }}">{{ $item->full_name }}</a>
                                     </h5>
                                     <p class="mb-15 color-muted mb-20 font-12">
                                         <i class="lnr lnr-clock ml-10"></i>
@@ -51,7 +51,7 @@
                                 <div class="entry-wrapper pt-20 pb-10 prl-20">
                                     <header class="entry-header">
                                         <h4 class="entry-title mb-10 mb-md-15 font-xs-16 font-sm-18 font-md-16 font-lg-16">
-                                            <a href="#">{{ $item->full_name }}</a>
+                                            <a href="{{ $item->link_address }}">{{ $item->full_name }}</a>
                                         </h4>
                                         <div class="entry-meta mb-10">
                                             <ul class="tag-info list-inline">
@@ -64,7 +64,7 @@
                                         <p class="entry-summary">{{ \Illuminate\Support\Str::words($item->resource->description, 8) }}</p>
                                     </div>
                                     <footer class="entry-footer text-left">
-                                        <a href="#" class="more-link btn btn-link">مشاهده<i class="icon fa fa-long-arrow-left"></i></a>
+                                        <a href="{{ $item->link_address }}" class="more-link btn btn-link">مشاهده<i class="icon fa fa-long-arrow-left"></i></a>
                                     </footer>
                                 </div>
                             </article>
@@ -86,7 +86,7 @@
                                 <div class="entry-wrapper pt-20 pb-10 prl-20">
                                     <header class="entry-header">
                                         <h4 class="entry-title mb-10 mb-md-15 font-xs-16 font-sm-18 font-md-16 font-lg-16">
-                                            <a href="#">{{ $item->full_name }}</a>
+                                            <a href="{{ $item->link_address }}">{{ $item->full_name }}</a>
                                         </h4>
                                         <div class="entry-meta mb-10">
                                             <ul class="tag-info list-inline">
@@ -99,7 +99,7 @@
                                         <p class="entry-summary">{{ \Illuminate\Support\Str::words($item->resource->description, 8) }}</p>
                                     </div>
                                     <footer class="entry-footer text-left">
-                                        <a href="#" class="more-link btn btn-link">مشاهده<i class="icon fa fa-long-arrow-left"></i></a>
+                                        <a href="{{ $item->link_address }}" class="more-link btn btn-link">مشاهده<i class="icon fa fa-long-arrow-left"></i></a>
                                     </footer>
                                 </div>
                             </article>
@@ -121,7 +121,7 @@
                                 <div class="entry-wrapper pt-20 pb-10 prl-20">
                                     <header class="entry-header">
                                         <h4 class="entry-title mb-10 mb-md-15 font-xs-16 font-sm-18 font-md-16 font-lg-16">
-                                            <a href="#">{{ $item->full_name }}</a>
+                                            <a href="{{ $item->link_address }}">{{ $item->full_name }}</a>
                                         </h4>
                                         <div class="entry-meta mb-10">
                                             <ul class="tag-info list-inline">
@@ -134,7 +134,7 @@
                                         <p class="entry-summary">{{ \Illuminate\Support\Str::words($item->resource->description, 8) }}</p>
                                     </div>
                                     <footer class="entry-footer text-left">
-                                        <a href="#" class="more-link btn btn-link">مشاهده<i class="icon fa fa-long-arrow-left"></i></a>
+                                        <a href="{{ $item->link_address }}" class="more-link btn btn-link">مشاهده<i class="icon fa fa-long-arrow-left"></i></a>
                                     </footer>
                                 </div>
                             </article>
@@ -156,7 +156,7 @@
                                 <div class="entry-wrapper pt-20 pb-10 prl-20">
                                     <header class="entry-header">
                                         <h4 class="entry-title mb-10 mb-md-15 font-xs-16 font-sm-18 font-md-16 font-lg-16">
-                                            <a href="#">{{ $item->full_name }}</a>
+                                            <a href="{{ $item->link_address }}">{{ $item->full_name }}</a>
                                         </h4>
                                         <div class="entry-meta mb-10">
                                             <ul class="tag-info list-inline">
@@ -169,7 +169,7 @@
                                         <p class="entry-summary">{{ \Illuminate\Support\Str::words($item->resource->description, 8) }}</p>
                                     </div>
                                     <footer class="entry-footer text-left">
-                                        <a href="#" class="more-link btn btn-link">مشاهده<i class="icon fa fa-long-arrow-left"></i></a>
+                                        <a href="{{ $item->link_address }}" class="more-link btn btn-link">مشاهده<i class="icon fa fa-long-arrow-left"></i></a>
                                     </footer>
                                 </div>
                             </article>

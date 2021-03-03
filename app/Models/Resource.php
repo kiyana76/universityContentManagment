@@ -85,4 +85,23 @@ class Resource extends Model
         }
         return $title;
     }
+
+    public function getLinkAddressAttribute() {
+        $address = '';
+        switch ($this->type){
+            case 'Note':
+                $address = route('note', [$this->slug]);
+                break;
+            case 'Question':
+                $address = route('question', [$this->slug]);
+                break;
+            case 'Book':
+                $address = route('book', [$this->slug]);
+                break;
+            case 'Exam':
+                $address = route('exam', [$this->slug]);
+                break;
+        }
+        return $address;
+    }
 }

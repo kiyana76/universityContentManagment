@@ -102,6 +102,8 @@
                         <div class="alert alert-danger">{{ $error }}</div>
                     @endforeach
                 @endif
+
+                @include('includes.breadcrumbs')
                 @yield('content')
             </div>
         </div>

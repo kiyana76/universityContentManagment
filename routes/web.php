@@ -16,7 +16,11 @@ use App\Http\Controllers\Auth\{ForgotPasswordController,
     RegisterController,
     LoginController,
     ResetPasswordController};
-use App\Http\Controllers\Guest\{HomeController};
+use App\Http\Controllers\Guest\{HomeController,
+    NoteController AS GuestNoteController,
+    BookController AS GuestBookController,
+    ExamController AS GuestExamController,
+    QuestionController AS GuestQuestionController,};
 
 /*
 |--------------------------------------------------------------------------
@@ -79,5 +83,18 @@ Route::group(['namespace' => 'Auth'], function () {
 
 //Guest Routs
 Route::group(['namespace' => 'Guest'], function () {
-   Route::get('home', [HomeController::class, 'index'])->name('home');
+   Route::get('/', [HomeController::class, 'index'])->name('home');
+
+   //Notes
+    Route::get('/notes/{noteSlug}', [GuestNoteController::class, 'single'])->name('note');
+
+    //Book
+    Route::get('/books/{bookSlug}', [GuestBookController::class, 'single'])->name('book');
+
+    //Exam
+    Route::get('/exams/{examSlug}', [GuestExamController::class, 'single'])->name('exam');
+
+    //Question
+    Route::get('/questions/{questionSlug}', [GuestQuestionController::class, 'single'])->name('question');
+
 });

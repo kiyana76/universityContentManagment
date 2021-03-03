@@ -17,4 +17,8 @@ class Book extends Resource
     public function resource() {
         return $this->belongsTo(Resource::class, 'resource_id', 'id');
     }
+
+    public function getLinkAddressAttribute() {
+        return route('book', [$this->resource->slug]);
+    }
 }
