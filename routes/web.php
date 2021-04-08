@@ -11,7 +11,9 @@ use App\Http\Controllers\Admin\{BookController,
     GlobalFieldController,
     NoteController,
     QuestionController,
-    ResourceController};
+    ResourceController,
+    PermissionController,
+    RoleController};
 use App\Http\Controllers\Auth\{ForgotPasswordController,
     RegisterController,
     LoginController,
@@ -47,11 +49,18 @@ Route::group(['prefix' => 'admin-manage'], function (){
         Route::resource('questions', QuestionController::class)->except(['show']);
         Route::resource('books', BookController::class)->except(['show']);
         Route::resource('exams', ExamController::class)->except(['show']);
+        Route::resource('permissions', PermissionController::class)->except(['show']);
+        Route::resource('roles', RoleController::class)->except(['show']);
         Route::post('resource/upload/{resource}', [ResourceController::class, 'uploadFile'])->name('admin.resource.upload');
         Route::delete('resource/upload/{file}', [ResourceController::class, 'deleteFile'])->name('admin.resource.delete');
 
         //captcha
         Route::get('/reload-captcha', [CaptchaServiceController::class, 'reloadCaptcha']);
+
+        //users-roles
+        Route::get('all-users', [RoleController::class, 'allUsers'])->name('all-users');
+        Route::get('assign-role/{user}', [RoleController::class, 'editUserRole'])->name('editUserRole');
+        Route::post('assign-role/{user}', [RoleController::class, 'updateUserRole'])->name('updateUserRole');
     });
 });
 

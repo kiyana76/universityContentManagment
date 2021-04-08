@@ -82,6 +82,35 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-pie-chart"></i>
+                            <p>
+                                مدیریت سایت
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('roles.index') }}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>نقش ها</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('permissions.index') }}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>مجوزها</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('all-users') }}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>نقش های کاربران</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-header">مثال‌ها</li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
